@@ -1,4 +1,9 @@
 'use client';
+import { useState } from 'react';
+import UserCredentials from '@/components/UserCredentials';
+import DatasetUpload from '@/components/DatasetUpload';
+import DashboardButton from '@/components/DashboardButton';
+import '@/styles/SignupPage.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
@@ -9,9 +14,12 @@ import {
   faCamera,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
-
-import "@/styles/SignupPage.css";
 const SignupPage = () => {
+  const [step, setStep] = useState(1); // Track current step
+
+  // Step Handlers
+  const handleCredentialsApproved = () => setStep(2); // Move to DatasetUpload
+  const handleDatasetUploaded = () => setStep(3); // Move to Dashboard Button
   return (
     <div className="loginContainer">
       {/* Left Section */}
@@ -20,58 +28,42 @@ const SignupPage = () => {
           <div className="logo">
             <img src="/images/logoPro.png" alt="Logo" className="logImg" />
           </div>
-           {/* Back to Settings Link */}
-           <div className="backContainer">
-           <Link href={"/login"} className="BackHome">
-            <FontAwesomeIcon icon={faChevronLeft} className="Hicon" />
-            <span>Login</span>
-          </Link>
-           </div>
-         
+          {/* Back to Settings Link */}
+          <div className="backContainer">
+            <Link href={"/login"} className="BackHome">
+              <FontAwesomeIcon icon={faChevronLeft} className="Hicon" />
+              <span>Cancel</span>
+            </Link>
+          </div>
+
         </div>
         <div className="loginText">
-          <h1 className="welcometext">Welcome signUp!</h1>
-          <p className="subtext">Log in to access your dashboard</p>
+          <h1 className="welcometext">Welcome Merchant</h1>
         </div>
-       
-      
+
+
         {/* Login Form */}
-        <form className="loginform">
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="inputfield"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="inputfield"
-          />
-          
-            <Link href="/dashboard" className="loginbutton">
-            Sign Up
-          </Link>
-         
-        </form>
 
-        <div className="orcontainer">
-          <span>OR</span>
-        </div>
-        <div className="googleContainer">
-  <Link href="/dashboard" className="googlebutton">
-  <FontAwesomeIcon icon={faGoogle} className="googleicon" />
+          {/* Step 1: User Credentials */}
+          {step === 1 && <UserCredentials onApproved={handleCredentialsApproved} />}
 
-    <span>Sign up with Google</span>
-  </Link>
-</div>
+          {/* Step 2: Dataset Upload */}
+          {step === 2 && <DatasetUpload onUploadComplete={handleDatasetUploaded} />}
 
-    
-       
+          {/* Step 3: Go to Dashboard */}
+          {step === 3 && <DashboardButton />}
+        
+
+        
+
+
+
       </div>
 
-   
+
     </div>
   );
 };
 
 export default SignupPage;
+
