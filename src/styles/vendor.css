@@ -1,0 +1,29 @@
+.VendorPage {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #F8F8F8;
+  }
+  *{
+    font-family: 'Poppins',sans-serif;
+  }
+  .actionContainerVendor2 {
+    padding: 10px 50px;
+  
+    border-radius: 8px;
+    
+   
+  }
+  
+  .dataset-feature2 {
+    padding: 10px 50px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  .visual-feature2{
+    padding: 10px 50px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  
